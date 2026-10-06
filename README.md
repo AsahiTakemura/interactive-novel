@@ -9,6 +9,7 @@ An interactive storytelling engine for Claude Code. Upload a book, choose your c
 - **Side Character Play** — Play as non-main characters with unique backstories
 - **Parallel Timelines** — Wrong choices branch off into alternate storylines
 - **Chat About This** — Pause and discuss your options before deciding
+- **Scene Illustrations** — Generate one new image after each story or dialogue turn, including discussions, with consistent characters and no spoilers for future events or unchosen branches. Images and prompts stay in the user's project; the built-in image tool is the default.
 - **Retrace** — Revisit choices and explore different paths
 
 ## How to Use

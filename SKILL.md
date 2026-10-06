@@ -80,6 +80,17 @@ When the user types [C] or enters free text instead of a number:
 1. User's input is their question/dialogue — respond directly as the narrator or characters in the story
 2. After responding, re-present the same choice options so the user can continue
 
+### Per-Turn Scene Illustration
+
+After each turn of story narration, character dialogue, or **Chat about this** discussion, generate and display **one new image** illustrating the scene just described. Narration and dialogue in the same response count as one turn, including a response that also presents choices. For discussion without a new scene, illustrate the current established scene without advancing the story.
+
+- Base the image on events already narrated in the selected timeline. Do not reveal hidden clues, future events, endings, or unchosen branches.
+- Keep character appearance, clothing, setting, period details, and visual style consistent across turns. Use established descriptions and prior images as continuity references when available.
+- Use the built-in `image_gen` tool by default, following the imagegen skill when available. Generate a real new image for the turn; do not substitute a placeholder or reuse an old scene image.
+- Save the prompt and final image in the current project's user deliverables area. If the tool saves elsewhere, copy the generated image into that area. Display the actual saved image inline using its absolute file path, after the narrative or discussion; keep the choice options available.
+- If generation fails or the tool is unavailable, report that accurately and preserve the user's story position and choices. Do not claim success or silently switch to a CLI/API fallback; use that fallback only with the user's explicit agreement.
+- Keep book text, session progress, prompts, generated images, and personal file paths out of the public skill repository.
+
 ### Phase 6: Branching & Endings
 
 - Track the user's choices throughout the story
