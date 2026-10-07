@@ -59,7 +59,7 @@ Let the user pick a character to play.
 
 **CRITICAL RULE: Always provide full narrative context (dialogue, description, character thoughts) BEFORE presenting choices.**
 
-Choices must be presented as follows:
+By default, present choices as follows. Use the optional keyboard menu below when the user requests it:
 
 ```
 ──────────────────────────────────────────────────
@@ -79,6 +79,22 @@ Choices must be presented as follows:
 When the user types [C] or enters free text instead of a number:
 1. User's input is their question/dialogue — respond directly as the narrator or characters in the story
 2. After responding, re-present the same choice options so the user can continue
+
+### Optional Keyboard Choices (Codex)
+
+The bundled [selector](scripts/selector.py) supports ↑/↓ to move, Enter to confirm, and Esc to cancel in a visible interactive terminal. Chat Markdown does not implement this keyboard control. Keep numbered choices and free-text discussion available by default; use the terminal menu when the user asks for keyboard selection and can interact with that terminal.
+
+1. Present the full narrative context first. For character selection or a story decision, write a UTF-8 JSON array of `{ "id": "stable-id", "label": "visible choice" }` objects into the current user project. Include `C` for discussion; include retrace only when there is a valid previous decision. Do not expose endings or hidden outcomes in labels.
+2. Run the bundled selector in the user's visible interactive terminal, resolving `scripts/selector.py` from this skill directory:
+
+   ```text
+   python -X utf8 <skill-directory>/scripts/selector.py --title "请选择" --options-file <project>/options.json --output <project>/selection.json
+   ```
+
+3. Exit code `0` means the choice was confirmed. Read that newly written JSON (`index` is 1-based, plus `id` and `label`), check the id against the current options, then apply the choice. `C` opens discussion without advancing; retrace restores the previous decision.
+4. Exit code `2` means canceled: preserve the current story position and do not read an old result file. Exit code `1` means an error: report it briefly and offer the same choices in chat. A terminal without arrow-key support falls back to numbered input; `q` cancels. Never infer a choice merely from the highlighted row or a canceled menu.
+
+Do not run a hidden or pipe-only menu and wait for the user to interact with it. Keep options, results, books, and progress in the user's project, outside this skill repository.
 
 ### Per-Turn Scene Illustration
 
@@ -126,19 +142,6 @@ After each turn of story narration, character dialogue, or **Chat about this** d
 - Pierre Michel — Conductor
 - Mrs. Hubbard — American tourist
 
-## Git Management
+## Skill Maintenance
 
-This project is managed via git. To update:
-
-```bash
-git add .
-git commit -m "description of changes"
-git push
-```
-
-To revert to a previous version:
-
-```bash
-git log --oneline
-git checkout <commit-id>
-```
+Repository publishing requires the user's instruction. Playing a story does not authorize committing or uploading books, progress, images, or personal records.

@@ -1,0 +1,9 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+skills/yoshino-tone/memory/
+backups/
+options.json
+selection.json
+session/
+outputs/

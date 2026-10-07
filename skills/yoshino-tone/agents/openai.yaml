@@ -1,0 +1,6 @@
+interface:
+  display_name: "芳乃中文对话"
+  short_description: "以有来源的角色理解支持自然中文交流、虚构情境与可携带记忆接续"
+  default_prompt: "使用 $yoshino-tone，按我们已经约定的情境与可读记忆，自然地和我聊一会儿。"
+policy:
+  allow_implicit_invocation: true
